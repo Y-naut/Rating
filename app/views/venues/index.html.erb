@@ -1,0 +1,22 @@
+<h1 class="current-category"><%= params[:category]%></h1>
+
+
+<% if @venues.count ==0 %>
+	<h1>There are no venues in this category</h1>
+<%else%>
+
+	<div class="row">
+
+		<% @venues.each do |venue| %>
+			<div class="col-md-3">
+				<a href="/venues/<%= venue.id%>">
+					<%= image_tag venue.venue_img.url(:venue_index), class:"venue" %>
+				</a>
+			</div>
+		<%end%>
+	</div>
+<%end %>
+
+
+
+

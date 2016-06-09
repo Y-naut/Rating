@@ -1,0 +1,60 @@
+<div class="row">
+	<div class="col-md-4">
+		<%= image_tag @venue.venue_img.url(:venue_index), class: "venue-show"%>
+	</div>
+
+	<div class="col-md-8">
+		<h2><%= @venue.title%></h2>
+		<h4>Average Rating</h2>
+		<div class="average-review-rating" data-score=<%= @average_review %>></div>
+		<span>Based on <%= @venue.reviews.count %> reviews</span>
+		<h3><%= @venue.address%></h3>
+		<p><%= @venue.description%></p>
+		
+	</div>
+</div>
+
+<div class="row">
+	<div class="col-md-4">
+	<%= render @venue.reviews %>
+
+		<div>
+			<%= link_to "Add Review", new_venue_review_path(@venue) %>
+		</div>
+
+
+	</div>
+	
+
+</div>
+
+<%= link_to "Back", root_path %>
+
+<% if user_signed_in? %>
+	<% if @venue.user_id == current_user.id %>
+		<%= link_to "Edit", edit_venue_path(@venue) %>
+		<%= link_to "Delete",venue_path(@venue), method: :delete, data: { confirm: "are you sure"} %>
+	<% end%>
+<% end%>
+
+<script>
+	$('.review-rating').raty({
+		readOnly: true,
+		score: function() {
+			return $(this).attr('data-score');
+		},
+		path: '/assets/'
+	});
+
+</script>
+
+<script>
+	$('.average-review-rating').raty({
+		readOnly: true,
+		score: function() {
+			return $(this).attr('data-score');
+		},
+		path: '/assets/'
+	});
+
+</script>

@@ -1,0 +1,10 @@
+<h1>Edit Venue</h1>
+
+<%= simple_form_for @venue, :html => { :multipart => true} do |f| %>
+	<%= f.select :category_id, @categories %>
+	<%= f.file_field :venue_img %>
+	<%= f.input :title, label: "Venue Title" %>
+	<%= f.input :description %>
+	<%= f.input :address%>
+	<%= f.button :submit %>
+<% end %>
